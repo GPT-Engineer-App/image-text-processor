@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Container, VStack, Text, Button, Input, Image, Box } from "@chakra-ui/react";
-import { FaUpload, FaCog } from "react-icons/fa";
+import { Container, VStack, Text, Button, Input, Image, Box, HStack } from "@chakra-ui/react";
+import { FaUpload, FaCog, FaFilter, FaArrowsAlt, FaDownload } from "react-icons/fa";
 
 const Index = () => {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -22,6 +22,18 @@ const Index = () => {
     setProcessedText("Simulated OCR text from the image.");
   };
 
+  const applyFilter = () => {
+    alert("Filter applied to the image.");
+  };
+
+  const resizeImage = () => {
+    alert("Image resized.");
+  };
+
+  const downloadImage = () => {
+    alert("Image downloaded.");
+  };
+
   return (
     <Container centerContent maxW="container.md" height="100vh" display="flex" flexDirection="column" justifyContent="center" alignItems="center">
       <VStack spacing={4}>
@@ -35,9 +47,20 @@ const Index = () => {
             <Image src={selectedImage} alt="Uploaded" />
           </Box>
         )}
-        <Button onClick={handleProcessImage} leftIcon={<FaCog />} colorScheme="blue" isDisabled={!selectedImage}>
-          Process Image
-        </Button>
+        <HStack spacing={4}>
+          <Button onClick={handleProcessImage} leftIcon={<FaCog />} colorScheme="blue" isDisabled={!selectedImage}>
+            Process Image
+          </Button>
+          <Button onClick={applyFilter} leftIcon={<FaFilter />} colorScheme="purple" isDisabled={!selectedImage}>
+            Apply Filter
+          </Button>
+          <Button onClick={resizeImage} leftIcon={<FaArrowsAlt />} colorScheme="orange" isDisabled={!selectedImage}>
+            Resize Image
+          </Button>
+          <Button onClick={downloadImage} leftIcon={<FaDownload />} colorScheme="green" isDisabled={!selectedImage}>
+            Download Image
+          </Button>
+        </HStack>
         {processedText && (
           <Box p={4} borderWidth={1} borderRadius="md" width="100%">
             <Text>{processedText}</Text>
